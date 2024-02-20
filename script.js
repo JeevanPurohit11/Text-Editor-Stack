@@ -1,4 +1,7 @@
 import {stack}  from './stack.js'
+//0 means : insert element 
+//1 meand : deleting the element;
+
 
 //use basically for not to cut ,paste functionalty on our texxt editor that no one can do back and insert element in between rather than to insert at last .
 document.onkeydown=function(event){
@@ -44,7 +47,18 @@ onload=function(){
         text=textbox.value;
      }
 
-     
-
-
-}
+     //undo operation
+    undo.onclick=function(){
+        let operation =stack.pop();
+        if(operation[0]!==-1){
+        temptext.innerHTML = "Performing undo operation on our input stack <br>"+ temptext.innerHTML;
+            if(operation[0] === 0){
+                let len = operation[1].length;
+                textbox.value = textbox.value.substring(0,textbox.value.length-len);
+            } else{
+                textbox.value += operation[1];
+            }
+            text = textbox.value;
+        }
+    };
+};
